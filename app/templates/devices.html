@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+    {% if switches %}
+<h1> Switches list :</h1>
+    <table class="table table-striped table-bordered table-hover">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">IP address</th>
+      <th scope="col">Site name</th>
+      <th scope="col">Serial number</th>
+      <th scope="col">Switch model</th>
+    </tr>
+  </thead>
+
+  <tbody>
+  {% for sw in switches %}
+    <tr>
+      <th scope="row">{{ sw.name }}</th>
+      <td>{{ sw.ip_address }}</td>
+      <td>{{ sw.site }}</td>
+      <td>{{ sw.serial }}</td>
+      <td>{{ sw.model }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+    </table>
+
+    {% endif %}
+
+    {% if aps %}
+<h1> Access Point list :</h1>
+<table class="table table-striped table-bordered table-hover">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">IP address</th>
+      <th scope="col">Site name</th>
+      <th scope="col">AP Model</th>
+      <th scope="col">Serial number</th>
+      <th scope="col">Master role</th>
+      <th scope="col">VC Name</th>
+    </tr>
+  </thead>
+
+  <tbody>
+        {% for ap in aps %}
+    <tr>
+      <th scope="row">{{ ap.name }}</th>
+      <td>{{ ap.ip_address }}</td>
+      <td>{{ ap.site }}</td>
+      <td>{{ ap.model }}</td>
+      <td>{{ ap.serial }}</td>
+      <td>{{ ap.swarm_master }}</td>
+      <td>{{ ap.swarm_name }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+    {% endif %}
+
+{% endblock %}

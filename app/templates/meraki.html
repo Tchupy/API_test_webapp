@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if org_id %}
+    org_id = {{ org_id }}
+    {% endif %}
+    {% if org_json %}
+    org_id = {{ org_json.org_id }}
+{% endif %}
+
+{% if org_list %}
+ <h1> Meraki Organization list :</h1>
+    <table class="table table-striped table-bordered table-hover">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Organization Name</th>
+      <th scope="col">Dashboard url</th>
+      <th scope="col">Organization tool</th>
+    </tr>
+  </thead>
+
+  <tbody>
+  {% for org in org_list %}
+    <tr>
+      <th scope="row">{{ org['name'] }}</th>
+      <td><a class="nav-link" href="{{ org.url }}">{{ org['url'] }}</a></td>
+      <td><a class="nav-link" href="{{ request.path }}/{{ org.id }}">{{ org['name'] }}</a></td>
+    </tr>
+  {% endfor %}
+  </tbody>
+    </table>
+{% endif %}
+
+{% if net_list %}
+<h1> Meraki Network list :</h1>
+    <table class="table table-striped table-bordered table-hover">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Network Name</th>
+      <th scope="col">Dashboard url</th>
+      <th scope="col">Network tools</th>
+    </tr>
+  </thead>
+
+  <tbody>
+  {% for network in net_list %}
+    <tr>
+      <th scope="row">{{ network['name'] }}</th>
+      <td><a class="nav-link" href="{{ network['url'] }}">{{ network['url'] }}</a></td>
+      <td>
+          <a class="nav-link" href="{{ request.path }}/{{ network.id }}/devices">devices</a>
+          <a class="nav-link" href="{{ request.path }}/{{ network.id }}/vlans">vlans</a>
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+    </table>
+{% endif %}
+
+{% if devices_list %}
+<h1> Meraki Devices list :</h1>
+    <table class="table table-striped table-bordered table-hover">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Device Name</th>
+      <th scope="col">Model</th>
+      <th scope="col">Serial Number</th>
+    </tr>
+  </thead>
+
+  <tbody>
+  {% for device in devices_list %}
+    <tr>
+      <th scope="row">{{ device.name }}</th>
+      <td>{{ device.model }}</td>
+      <td>{{ device.serial }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+    </table>
+{% endif %}
+
+{% if vlan_list %}
+<h1> Meraki VLAN list :</h1>
+    <table class="table table-striped table-bordered table-hover">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">VLAN Name</th>
+      <th scope="col">VLAN Id</th>
+      <th scope="col">IP address</th>
+      <th scope="col">IP subnet</th>
+    </tr>
+  </thead>
+
+  <tbody>
+  {% for vlan in vlan_list %}
+    <tr>
+      <th scope="row">{{ vlan.name }}</th>
+      <td>{{ vlan.id }}</td>
+      <td>{{ vlan.applianceIp }}</td>
+      <td>{{ vlan.subnet }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+    </table>
+{% endif %}
+
+{% endblock %}

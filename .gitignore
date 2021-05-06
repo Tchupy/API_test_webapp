@@ -2,3 +2,4 @@
 /Central_call.py
 /*.log
 /*.json
+/app/config_token.json
